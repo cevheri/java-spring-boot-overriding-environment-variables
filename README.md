@@ -40,12 +40,12 @@ We talk about many ways to override environment variables in a Spring Boot appli
 ## Getting Started
 * Clone the repository
 ```shell
-git clone https://github.com/cevheri/spring-boot-overriding-environment-variables.git
+git clone https://github.com/cevheri/java-spring-boot-overriding-environment-variables.git
 ```
 
 * Change directory
 ```shell
-cd spring-boot-overriding-environment-variables
+cd java-spring-boot-overriding-environment-variables
 ```
 
 * Run the Spring Boot application
