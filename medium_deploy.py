@@ -9,8 +9,8 @@ import requests
 MEDIUM_USER_ID = "USER_ID"
 MEDIUM_API_URL = f"https://api.medium.com/v1/users/{MEDIUM_USER_ID}/posts"
 MEDIUM_TOKEN = "TOKEN"
-TITLE = "NLP Sentiment Analysis on Restaurant Reviews"
-FILE_NAME = "nlp-sentiment-analysis-restaurant.md"
+TITLE = "Java Spring Boot Overriding Environment Variables Guide"
+FILE_NAME = "README.md"
 
 
 def main():
