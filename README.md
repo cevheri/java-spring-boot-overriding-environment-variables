@@ -6,7 +6,7 @@ This is an example of overriding the application.yml file with the OS environmen
 
 ![img.png](images/title.png)
 
-We talk about many ways to override environment variables in a Spring Boot application. Not auto-configuration :(
+We talk about many ways to override environment variables in a Spring Boot application. Not autoconfiguration values :(
 
 ---
 
@@ -67,7 +67,7 @@ When you run a Spring Boot application, the application properties are converted
 
 * application.yml file
 ```yml
-app-properties:
+app-object:
   name: "Spring Boot Overriding Environment Variables"
   version: "0.0.1"
   description: "Spring Boot Overriding Environment Variables with application.yml"
@@ -76,11 +76,11 @@ app-properties:
 ```
 * OS Environment Variable
 ```shell
-APP_PROPERTIES_NAME=overridden-name
-APP_PROPERTIES_VERSION=overridden-version
-APP_PROPERTIES_DESCRIPTION=overridden-description
-APP_PROPERTIES_AUTHOR=overridden-author
-APP_PROPERTIES_EMAIL=overridden-email
+APP_OBJECT_NAME=overridden-name
+APP_OBJECT_VERSION=overridden-version
+APP_OBJECT_DESCRIPTION=overridden-description
+APP_OBJECT_AUTHOR=overridden-author
+APP_OBJECT_EMAIL=overridden-email
 ```
 
 ---
@@ -121,14 +121,15 @@ Run the Spring Boot application using the `java -jar` command.
 ```shell
 java -jar target/soe.jar
 ```
-![default-values.png](images/default-values.png)
+![default-values.png](images/java-default-values.png)
 ---
 
 #### Override Environment Variables
 ```shell
-java -jar '-Dapp-properties.name=overridden-name-cevheri' '-Dapp-roles[0]=overridden-role-0-cevheri' '-Dapp-paths[0].roles[4]=overridden-path-0-role-0-cevheri' target/soe.jar
+java -jar '-Dapp-object.name=overridden-name-cevheri' '-Dapp-arrays.roles[0]=overridden-role-0-cevheri' '-Dapp-multiple.paths[0].roles[0]=overridden-path-0-role-0-cevheri' target/soe.jar
 ```
-![overrided-values.png](images/overrided-values.png)
+![override-values.png](images/java-override-values.png)
+
 ---
 
 ### Docker
@@ -139,10 +140,64 @@ docker run -p 8080:8080 soe:latest
 ![docker-default-values.png](images/docker-default-values.png)
 #### Override Environment Variables
 ```shell
-docker run -p 8080:8080 -e APP_PROPERTIES_NAME=overridden-name-cevheri-docker -e APP_ROLES_0=overridden-role-0-cevheri-docker -e APP_PATHS_0_ROLES_4=overridden-path-0-role-0-cevheri-docker soe:latest
+docker run -p 8080:8080 -e APP_OBJECT_NAME=overridden-name-cevheri-docker -e APP_ARRAYS_ROLES_0=overridden-role-0-cevheri-docker -e APP_MULTIPLE_PATHS_0_ROLES_0=overridden-path-0-role-0-cevheri-docker soe:latest
 ```
-![docker-overrided-values.png](images/docker-overrided-values.png)
+![docker-override-values.png](images/docker-override-values.png)
 
+
+---
+## Using Spring Bean
+```java
+@Configuration
+@ConfigurationProperties(prefix = "app-multiple")
+public class AppPaths {
+
+    private List<Path> paths;
+
+    public List<Path> getPaths() {
+        return paths;
+    }
+
+    public void setPaths(List<Path> paths) {
+        this.paths = paths;
+    }
+
+    public static class Path {
+        private String method;
+        private List<String> roles;
+
+        public String getMethod() {
+            return method;
+        }
+
+        public void setMethod(String method) {
+            this.method = method;
+        }
+
+        public List<String> getRoles() {
+            return roles;
+        }
+
+        public void setRoles(List<String> roles) {
+            this.roles = roles;
+        }
+    }
+}
+```
+You should override whole array object like below.
+```shell
+docker run -p 8080:8080 \
+-e APP_MULTIPLE_PATHS_0_METHOD=NEW_POST \
+-e APP_MULTIPLE_PATHS_0_ROLES_0=new_create \
+-e APP_MULTIPLE_PATHS_0_ROLES_1=new_read \
+-e APP_MULTIPLE_PATHS_0_ROLES_2=new_update \
+-e APP_MULTIPLE_PATHS_0_ROLES_3=new_delete \
+-e APP_MULTIPLE_PATHS_0_ROLES_4=new_admin \
+ soe:latest
+ 
+```
+
+---
 
 ## Test
 

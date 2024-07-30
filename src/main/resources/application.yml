@@ -1,7 +1,7 @@
 # This is an example of overriding the application.yml file with the OS environment variables.
 
 # Basic configuration for the application
-app-properties:
+app-object:
   name: "Spring Boot Overriding Environment Variables"
   version: "0.0.1"
   description: "Spring Boot Overriding Environment Variables with application.yml"
@@ -9,17 +9,21 @@ app-properties:
   email: "cevheribozoglan@gmail.com"
 
 # Advanced configuration Array values
-app-roles:
-  - read
-  - write
-  - delete
-  - admin
+app-arrays:
+  roles:
+    - array-create
+    - array-read
+    - array-update
+    - array-delete
+    - array-admin
 
 # Advanced configuration Array in Array values
-app-paths:
-  - method: POST
-    roles:
-      - read
-      - write
-      - delete
-      - admin
+app-multiple:
+  paths:
+    - method: POST
+      roles:
+        - path-create
+        - path-read
+        - path-update
+        - path-delete
+        - path-admin
