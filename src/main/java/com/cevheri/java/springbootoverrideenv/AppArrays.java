@@ -7,7 +7,7 @@ import java.util.List;
 
 @Configuration
 @ConfigurationProperties(prefix = "app-arrays")
-public class AppRoles {
+public class AppArrays {
     private List<String> roles;
 
     public List<String> getRoles() {

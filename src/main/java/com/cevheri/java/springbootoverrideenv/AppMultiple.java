@@ -7,7 +7,7 @@ import java.util.List;
 
 @Configuration
 @ConfigurationProperties(prefix = "app-multiple")
-public class AppPaths {
+public class AppMultiple {
 
     private List<Path> paths;
 

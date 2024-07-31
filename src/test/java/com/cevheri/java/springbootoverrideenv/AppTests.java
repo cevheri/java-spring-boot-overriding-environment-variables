@@ -29,10 +29,10 @@ class AppTests {
     private AppProperties appProperties;
 
     @Autowired
-    private AppRoles appRoles;
+    private AppArrays appArrays;
 
     @Autowired
-    private AppPaths appPaths;
+    private AppMultiple appMultiple;
 
     @Test
     void contextLoads() {
@@ -64,12 +64,12 @@ class AppTests {
 
     @Test
     void whenAppRolesRole0Overridden_thenSuccessModern() {
-        assert appRoles.getRoles().get(0).equals("overridden-role-0");
+        assert appArrays.getRoles().get(0).equals("overridden-role-0");
     }
 
     @Test
     void whenAppPathsPath0Role0Overridden_thenSuccessModern() {
-        assert appPaths.getPaths().get(0).getRoles().get(0).equals("overridden-path-0-role-0");
+        assert appMultiple.getPaths().get(0).getRoles().get(0).equals("overridden-path-0-role-0");
     }
     //endregion modern way
 
